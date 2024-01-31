@@ -39,10 +39,12 @@ add_action( 'enqueue_block_editor_assets', function() {
 
 add_filter( 'pre_render_block', function( ?string $render, array $block ) {
     switch( $block[ 'attrs' ][ 'namespace' ] ?? '' ) {
-        case 'piotrpress/prev-post-query' : $post = get_previous_post(); break;
-        case 'piotrpress/next-post-query' : $post = get_next_post(); break;
-        default : $post = null;
+        case 'piotrpress/prev-post-query' :
+            add_filter( 'query_loop_block_query_vars', fn() => ( ( $post = get_previous_post() ) ? [ 'post__in' => [ $post->ID ] ] : [ 'post__in' => [0] ] ) );
+            break;
+        case 'piotrpress/next-post-query' :
+            add_filter( 'query_loop_block_query_vars', fn() => ( ( $post = get_next_post() ) ? [ 'post__in' => [ $post->ID ] ] : [ 'post__in' => [0] ] ) );
+            break;
     }
-    if( $post ) add_filter( 'query_loop_block_query_vars', fn() => ( $post ? [ 'post__in' => [ $post->ID ] ] : [] ) );
     return $render;
 }, 10, 2 );
