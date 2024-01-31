@@ -4,7 +4,7 @@
  * Plugin Name: Adjacent Posts
  * Plugin URI: https://github.com/PiotrPress/wordpress-adjacent-posts
  * Description: This WordPress plugin adds Previous/Next posts Query Loop block Variations.
- * Version: 0.1.0
+ * Version: 0.2.1
  * Requires at least: 6.4
  * Requires PHP: 7.4
  * Author: Piotr Niewiadomski
